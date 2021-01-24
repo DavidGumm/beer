@@ -36,7 +36,8 @@
                     if (this.readyState == 4 && this.status == 200) {
                         console.log("done");
                         content = xhr.responseText.split('\n')[2].replace('  container.innerHTML = "', '').replace('";', '').replace(/\\n/g, '').replace(/\\/g, '');
-                        document.body.innerHTML = content;
+                        (document.body.querySelector('data')).innerHTML = content;
+                        document.body.querySelector('h1').innerText = "Beer Me!"
                         BeerMe();
                     }
                 };
@@ -44,6 +45,7 @@
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send();
             }
+            //https://business.untappd.com/locations/28232/themes/108502/js
             getBeerMenu('data/js.js');
     </script>
     <head>
@@ -52,6 +54,7 @@
     </head>
     <body>
         <h1>Loading...</h1>
+        <data></data>
         <div id="tabulator-beer-menu"></div>
     </body>
 </html>
