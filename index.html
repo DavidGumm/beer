@@ -35,7 +35,8 @@
                     }
                     catch{ }
                 });
-
+                let styles = ["Ale", "Barleywine", "Belgian", "Bock", "Cider", "Fruit Beer", "Hard Seltzer", "Hefeweizen", "IPA", "Lager", "Lambic", "Mead", "Mix", "Pilsner", "Porter", "Shandy", "Sour", "Stout", "Wheat Beer"];
+                
                 table = new Tabulator("#tabulator-beer-menu", {
                     data: beers,
                     pagination: "local",
@@ -44,14 +45,14 @@
                         { column: "atc", dir: "asc" },
                     ],
                     columns: [
-                        { title: "Name", field: "name" },
-                        { title: "Style", field: "style" },
+                        { title: "Name", field: "name", headerFilter: "input" },
+                        { title: "Style", field: "style", headerFilter: "input" },
                         { title: "ABV", field: "abv" },
                         { title: "Price", field: "price" },
                         { title: "ATC", field: "atc" },
-                        { title: "Brewery", field: "brewery" },
+                        { title: "Brewery", field: "brewery", headerFilter: "input"} ,
                         { title: "Size", field: "size" },
-                        { title: "Type", field: "type" },
+                        { title: "Type", field: "type", headerFilter: "input" },
                         { title: "Content", field: "content" },
                     ]
                 });
@@ -75,6 +76,8 @@
             }
             //https://business.untappd.com/locations/28232/themes/108502/js
             getBeerMenu('data/file');
+
+            //table.setFilter("style", "like", "");
     </script>
     <head>
         <script src="js/tabulator.min.js"></script>
