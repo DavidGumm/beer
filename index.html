@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <script>
-        
         let content = '';
             let beers = new Array();
             function BeerMe() {
@@ -31,7 +30,6 @@
                     autoColumns: true,
                 });
             }
-
             function getBeerMenu(url) {
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
@@ -43,11 +41,10 @@
                     }
                 };
                 xhr.open('GET', url, true);
-                xhr.withCredentials = true;
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send();
             }
-            getBeerMenu('https://business.untappd.com/locations/28232/themes/108502/js');
+            getBeerMenu('https://thingproxy.freeboard.io/fetch/http://business.untappd.com/locations/28232/themes/108502/js');
     </script>
     <head>
         <script src="js/tabulator.min.js"></script>
