@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <script>
+        const mlToOz = 0.03381;
         let content = '';
             let beers = new Array();
             function BeerMe() {
@@ -17,6 +18,12 @@
 
                         if (beer.size.endsWith("oz")) {
                             let oz = parseInt(beer.size.replace("oz", ""));
+                            let percent = beer.abv / 100;
+                            beer.content = oz * percent
+                            beer.atc = parseInt(beer.price.replace("$", '')) / beer.content
+                        }
+                        if (beer.size.endsWith("ml")) {
+                            let oz = (parseInt(beer.size.replace("ml", "")) * mlToOz);
                             let percent = beer.abv / 100;
                             beer.content = oz * percent
                             beer.atc = parseInt(beer.price.replace("$", '')) / beer.content
