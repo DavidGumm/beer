@@ -34,11 +34,10 @@
                 });
                 var table = new Tabulator("#tabulator-beer-menu", {
                     data: beers,
-                    autoColumns: true,
                     pagination: "local",
                     paginationSize: 20,
                     initialSort: [
-                        { column: "ATC", dir: "desc" },
+                        { column: "atc", dir: "asc" },
                     ],
                     columns: [
                         { title: "Name", field: "name" },
