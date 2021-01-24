@@ -9,7 +9,9 @@
                 beerElm.forEach((elm) => {
                     try {
                         let beer = {};
-                        beer.name = elm.querySelector('p.beer-name').innerText.replace(/(^\s+|\s+$)/g, '').replace('\n', ' ').replace(/\s+/g, ' ');
+                        "item-title-color"
+                        beer.name = elm.querySelector('p.beer-name > a').innerText.replace(/(^\s+|\s+$)/g, '').replace('\n', ' ').replace(/\s+/g, ' ');
+                        beer.style = elm.querySelector('span.beer-style').innerText.replace(/(^\s+|\s+$)/g, '').replace('\n', ' ').replace(/\s+/g, ' ');
                         beer.abv = parseInt(elm.querySelector('span.abv').innerText.replace("% ABV", "").replace(/(^\s+|\s+$)/g, ''));
                         beer.brewery = elm.querySelector('span.brewery').innerText.replace(/(^\s+|\s+$)/g, '');
                         beer.size = elm.querySelector('span.type').innerText.split(" ")[0].replace(/(^\s+|\s+$)/g, '')
@@ -32,6 +34,7 @@
                     }
                     catch{ }
                 });
+
                 var table = new Tabulator("#tabulator-beer-menu", {
                     data: beers,
                     pagination: "local",
@@ -41,6 +44,7 @@
                     ],
                     columns: [
                         { title: "Name", field: "name" },
+                        { title: "Style", field: "style" },
                         { title: "ABV", field: "abv" },
                         { title: "Price", field: "price" },
                         { title: "ATC", field: "atc" },
