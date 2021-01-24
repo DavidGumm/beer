@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        
+        let content = '';
+            let beers = new Array();
+            function BeerMe() {
+                let beerElm = document.querySelectorAll("div.beer");
+                beerElm.forEach((elm) => {
+                    try {
+                        let beer = {};
+                        beer.name = elm.querySelector('p.beer-name').innerText.replace(/(^\s+|\s+$)/g, '').replace('\n', ' ').replace(/\s+/g, ' ');
+                        beer.abv = parseInt(elm.querySelector('span.abv').innerText.replace("% ABV", "").replace(/(^\s+|\s+$)/g, ''));
+                        beer.brewery = elm.querySelector('span.brewery').innerText.replace(/(^\s+|\s+$)/g, '');
+                        beer.size = elm.querySelector('span.type').innerText.split(" ")[0].replace(/(^\s+|\s+$)/g, '')
+                        beer.type = elm.querySelector('span.type').innerText.split(" ")[1].replace(/(^\s+|\s+$)/g, '')
+                        beer.price = elm.querySelector('span.price').innerText.replace(/\s+/g, ' ').replace(/(^\s+|\s+$)/g, '');
+
+                        if (beer.size.endsWith("oz")) {
+                            let oz = parseInt(beer.size.replace("oz", ""));
+                            let percent = beer.abv / 100;
+                            beer.content = oz * percent
+                            beer.atc = parseInt(beer.price.replace("$", '')) / beer.content
+                        }
+                        beers.push(beer);
+                    }
+                    catch{ }
+                });
+                var table = new Tabulator("#tabulator-beer-menu", {
+                    data: beers,
+                    autoColumns: true,
+                });
+            }
+
+            function getBeerMenu(url) {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("done");
+                        content = xhr.responseText.split('\n')[2].replace('  container.innerHTML = "', '').replace('";', '').replace(/\\n/g, '').replace(/\\/g, '');
+                        document.body.innerHTML = content;
+                        BeerMe();
+                    }
+                };
+                xhr.open('GET', url, true);
+                xhr.withCredentials = true;
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send();
+            }
+            getBeerMenu('https://business.untappd.com/locations/28232/themes/108502/js');
+    </script>
+    <head>
+        <script src="js/tabulator.min.js"></script>
+        <link href="css/tabulator_midnight.min.css">
+    </head>
+    <body>
+        <h1>Loading...</h1>
+        <div id="tabulator-beer-menu"></div>
+    </body>
+</html>
