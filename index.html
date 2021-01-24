@@ -36,8 +36,10 @@
                     if (this.readyState == 4 && this.status == 200) {
                         console.log("done");
                         content = xhr.responseText.split('\n')[2].replace('  container.innerHTML = "', '').replace('";', '').replace(/\\n/g, '').replace(/\\/g, '');
-                        (document.body.querySelector('data')).innerHTML = content;
-                        document.body.querySelector('h1').innerText = "Beer Me!"
+                        const data = document.body.querySelector('data');
+                        const header = document.body.querySelector('h1');
+                        data.innerHTML = content;
+                        header.innerText = "Beer Me!"
                         BeerMe();
                     }
                 };
@@ -46,7 +48,7 @@
                 xhr.send();
             }
             //https://business.untappd.com/locations/28232/themes/108502/js
-            getBeerMenu('data/js.js');
+            getBeerMenu('data/file');
     </script>
     <head>
         <script src="js/tabulator.min.js"></script>
