@@ -3,6 +3,7 @@
     <script>
         const mlToOz = 0.03381;
         let content = '';
+        let table
             let beers = new Array();
             function BeerMe() {
                 let beerElm = document.querySelectorAll("div.beer");
@@ -35,7 +36,7 @@
                     catch{ }
                 });
 
-                var table = new Tabulator("#tabulator-beer-menu", {
+                table = new Tabulator("#tabulator-beer-menu", {
                     data: beers,
                     pagination: "local",
                     paginationSize: 20,
