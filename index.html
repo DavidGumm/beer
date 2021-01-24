@@ -28,6 +28,11 @@
                 var table = new Tabulator("#tabulator-beer-menu", {
                     data: beers,
                     autoColumns: true,
+                    pagination: "local",
+                    paginationSize: 20,
+                    initialSort: [
+                        { column: "ATC", dir: "asc" },
+                    ],
                 });
             }
             function getBeerMenu(url) {
@@ -52,7 +57,7 @@
     </script>
     <head>
         <script src="js/tabulator.min.js"></script>
-        <link href="css/tabulator_midnight.min.css">
+        <link rel="stylesheet" href="css/tabulator_midnight.min.css">
     </head>
     <body>
         <h1>Loading...</h1>
