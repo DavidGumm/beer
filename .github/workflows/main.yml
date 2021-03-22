@@ -26,8 +26,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: suisei-cn/actions-download-file@v1
-        id: downloadfile  # Remember to give an ID if you need the output filename
+        id: file  # Remember to give an ID if you need the output filename
         name: Download the file
         with:
           url: "https://business.untappd.com/locations/28232/themes/108502/js"
-          target: data/file
+          target: data/
